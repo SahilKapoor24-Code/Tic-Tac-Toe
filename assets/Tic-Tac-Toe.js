@@ -45,24 +45,28 @@ box.forEach((boxs) => {
 });
 
 function checkwinner() {
-    for(let patterns of winpatterns) {
+    for (let patterns of winpatterns) {
         let posval1 = box[patterns[0]].innerText;
         let posval2 = box[patterns[1]].innerText;
         let posval3 = box[patterns[2]].innerText;
 
-        if(posval1 !== "" && posval2 !== "" && posval3 !== "") {
-            if(posval1 === posval2 && posval2 === posval3) {
+        if (posval1 !== "" && posval2 !== "" && posval3 !== "") {
+            if (posval1 === posval2 && posval2 === posval3) {
                 console.log("Winner!!!");
                 showwinner(posval1);
-                gameActive = false; 
-                break;
+                gameActive = false;
+                return; 
             }
         }
-        if(count === 9){
-            draw();
-        }
+    }
+
+    // Check for a draw after verifying all win patterns
+    if (count === 9 && gameActive) {
+        draw();
+        count = 0;
     }
 }
+
 
 function disablebtns() {
     for(let boxs of box) {
